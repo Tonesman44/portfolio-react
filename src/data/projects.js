@@ -22,7 +22,7 @@ export const projects = [
       'Shipped new features on a fixed academic deadline',
     ],
     links: [
-      { label: 'Open the live build', href: 'https://cis-iis2.temple.edu/Fall2025/CIS3342_tup83292/' },
+      { label: 'Open the live build', href: 'https://cis-iis2.temple.edu/Fall2025/CIS3342_tup84860/TermProject/Home' },
       { label: 'Browse my GitHub', href: 'https://github.com/Tonesman44?tab=repositories' },
     ],
     slides: [

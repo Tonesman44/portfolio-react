@@ -5,7 +5,7 @@ export default function Footer() {
   return (
     <footer className="footer">
       <div className="footer__inner">
-        <p>© {new Date().getFullYear()} Antonio Fabrizio. Built with React and a lot of Red Bull.</p>
+        <p>© {new Date().getFullYear()} Antonio Fabrizio.</p>
         <div className="footer__links">
           <a href={site.github} target="_blank" rel="noreferrer" aria-label="GitHub"><FaGithub /></a>
           <a href={site.linkedin} target="_blank" rel="noreferrer" aria-label="LinkedIn"><FaLinkedinIn /></a>

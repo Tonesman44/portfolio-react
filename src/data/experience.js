@@ -1,6 +1,8 @@
 import excellisLogo from '../assets/logos/excellis.png'
 import suitableLogo from '../assets/logos/suitable.png'
 import owlLogo from '../assets/logos/temple-esports.png'
+import crmDashboard from '../assets/photos/excellis-crm-dashboard.jpg'
+import crmPipeline from '../assets/photos/excellis-crm-pipeline.jpg'
 import suitableTeam from '../assets/photos/suitable-team.jpg'
 import suitableGroup from '../assets/photos/suitable-group.jpg'
 import suitableBadge from '../assets/photos/suitable-badge.jpg'
@@ -24,8 +26,12 @@ export const experience = [
       'Helped build a suite of AI skills that draft BRDs, review them for gaps, and generate development tickets, cutting the time from business request to sprint-ready work.',
       'Work directly with stakeholders, designers, and developers through sprint planning, code reviews, and daily standups to keep delivery predictable and quality high.',
     ],
-    photos: [],
-    // Shown when there are no photos yet
+    photos: [
+      { src: crmDashboard, alt: 'Illustrative CRM dashboard mockup in the style of the platforms Antonio builds', span: 'wide' },
+      { src: crmPipeline, alt: 'Illustrative CRM sales pipeline board mockup', span: 'wide' },
+    ],
+    photoNote: 'Mockups for illustration, not an actual client build',
+    // Shown only if photos is empty
     panel: { big: '6', small: 'legacy codebases supported alongside new CRM builds' },
   },
   {

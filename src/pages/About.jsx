@@ -22,9 +22,6 @@ export default function About() {
         <p>
           I’m a full stack engineer at Excellis Interactive and a 2026 graduate of Temple University, where I studied Information Science and Technology. I started out at Suitable writing test suites and migrating Angular to React. Now I work across the whole stack: .NET APIs, Angular and Ionic front ends, and the AI tooling that takes our team from a business request to sprint-ready tickets.
         </p>
-        <p>
-          When I’m not shipping, I’m probably in a lobby. Esports taught me as much about running a team as any job has, so here’s that side of the story.
-        </p>
       </PageHead>
 
       <section className="esports wrap" aria-labelledby="esports-title">
@@ -32,6 +29,7 @@ export default function About() {
           <img src={owl} alt="" className="esports__logo" />
           <div>
             <h2 id="esports-title" className="h2">Temple Esports</h2>
+            <p className="esports__lede">Esports taught me as much about running a team as any job has.</p>
             <div className="esports__plates">
               <Plate>Head of competitive operations</Plate>
               <Plate tone="dark">Marvel Rivals player</Plate>

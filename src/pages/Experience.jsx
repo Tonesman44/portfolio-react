@@ -15,12 +15,15 @@ function Photos({ job }) {
     )
   }
   return (
-    <div className={`xp__photos xp__photos--${job.photos.length}`}>
-      {job.photos.map((p) => (
-        <figure key={p.alt} className={p.span === 'wide' ? 'is-wide' : ''}>
-          <img src={p.src} alt={p.alt} loading="lazy" />
-        </figure>
-      ))}
+    <div>
+      <div className={`xp__photos xp__photos--${job.photos.length}`}>
+        {job.photos.map((p) => (
+          <figure key={p.alt} className={p.span === 'wide' ? 'is-wide' : ''}>
+            <img src={p.src} alt={p.alt} loading="lazy" />
+          </figure>
+        ))}
+      </div>
+      {job.photoNote && <p className="xp__photo-note">{job.photoNote}</p>}
     </div>
   )
 }
