@@ -1,18 +1,17 @@
-import React from 'react';
+import { FaGithub, FaLinkedinIn, FaEnvelope } from 'react-icons/fa6'
+import { site } from '../data/site.js'
 
-function Footer() {
+export default function Footer() {
   return (
     <footer className="footer">
-      <p>© {new Date().getFullYear()} Antonio Fabrizio. All rights reserved.</p>
-      <div className="footer-links">
-        <a href="https://github.com/Tonesman44" target="_blank" rel="noreferrer">GitHub</a>
-        <a href="https://www.linkedin.com/in/antonio-fabrizio-746989248" target="_blank" rel="noreferrer">
-          LinkedIn
-        </a>
-        <a href="mailto:antonioman44@gmail.com">Email Me</a>
+      <div className="footer__inner">
+        <p>© {new Date().getFullYear()} Antonio Fabrizio. Built with React and a lot of Red Bull.</p>
+        <div className="footer__links">
+          <a href={site.github} target="_blank" rel="noreferrer" aria-label="GitHub"><FaGithub /></a>
+          <a href={site.linkedin} target="_blank" rel="noreferrer" aria-label="LinkedIn"><FaLinkedinIn /></a>
+          <a href={`mailto:${site.email}`} aria-label="Email"><FaEnvelope /></a>
+        </div>
       </div>
     </footer>
-  );
+  )
 }
-
-export default Footer;
