@@ -12,12 +12,25 @@ export const site = {
   necc: 'https://liquipedia.net/marvelrivals/NECC/2026/Nationals/Division_II',
 }
 
+// One page, seven sections. `id` is the element id the nav scrolls to.
 export const nav = [
-  { to: '/', label: 'Home', end: true },
-  { to: '/about', label: 'About' },
-  { to: '/projects', label: 'Projects' },
-  { to: '/experience', label: 'Experience' },
-  { to: '/skills', label: 'Skills' },
-  { to: '/resume', label: 'Resume' },
-  { to: '/contact', label: 'Contact' },
+  { id: 'top', label: 'Home' },
+  { id: 'about', label: 'About' },
+  { id: 'projects', label: 'Projects' },
+  { id: 'experience', label: 'Experience' },
+  { id: 'skills', label: 'Skills' },
+  { id: 'resume', label: 'Resume' },
+  { id: 'contact', label: 'Contact' },
+]
+
+// Broadcast ticker strips between sections.
+export const ticker = [
+  'Full stack engineer',
+  'Excellis Interactive',
+  '.NET + Angular + Ionic',
+  'React + Vite',
+  'Brainrot Brawl on Roblox',
+  'NECC D2 national champion',
+  'Temple University 2026',
+  'Horsham, PA',
 ]

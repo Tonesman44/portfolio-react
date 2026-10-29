@@ -1,12 +1,17 @@
-import { useEffect, useState } from 'react'
-import { NavLink, Link } from 'react-router-dom'
-import { AnimatePresence, motion } from 'motion/react'
+import { useEffect, useMemo, useState } from 'react'
+import { AnimatePresence, motion, useScroll, useSpring } from 'motion/react'
 import { FaBars, FaXmark } from 'react-icons/fa6'
 import { nav } from '../data/site.js'
+import useActiveSection from '../hooks/useActiveSection.js'
+import { useCut } from './Cut.jsx'
 
 export default function Nav() {
   const [open, setOpen] = useState(false)
-  const close = () => setOpen(false)
+  const ids = useMemo(() => nav.map((n) => n.id), [])
+  const active = useActiveSection(ids)
+  const cutTo = useCut()
+  const { scrollYProgress } = useScroll()
+  const progress = useSpring(scrollYProgress, { stiffness: 220, damping: 40, mass: 0.4 })
 
   useEffect(() => {
     document.body.style.overflow = open ? 'hidden' : ''
@@ -15,33 +20,39 @@ export default function Nav() {
     return () => window.removeEventListener('keydown', onKey)
   }, [open])
 
+  const go = (id) => (e) => {
+    e.preventDefault()
+    setOpen(false)
+    cutTo(id)
+  }
+
   return (
     <>
-    <header className="nav">
-      <div className="nav__inner">
-        <Link to="/" onClick={close} className="nav__mark" aria-label="Antonio Fabrizio, home">
-          <span className="nav__mark-plate">AF</span>
-          <span className="nav__mark-name">Antonio Fabrizio</span>
-        </Link>
+      <header className="nav">
+        <div className="nav__inner">
+          <a href="#top" onClick={go('top')} className="nav__mark" aria-label="Antonio Fabrizio, back to top">
+            <span className="nav__mark-plate">AF</span>
+            <span className="nav__mark-name">Antonio Fabrizio</span>
+          </a>
 
-        <nav className="nav__links" aria-label="Primary">
-          {nav.map((item) => (
-            <NavLink key={item.to} to={item.to} end={item.end} className="nav__link">
-              {({ isActive }) => (
-                <>
+          <nav className="nav__links" aria-label="Primary">
+            {nav.map((item) => {
+              const isActive = active === item.id
+              return (
+                <a key={item.id} href={`#${item.id}`} onClick={go(item.id)} className={`nav__link ${isActive ? 'active' : ''}`} aria-current={isActive ? 'location' : undefined}>
                   {isActive && <motion.span layoutId="nav-active" className="nav__active" transition={{ type: 'spring', stiffness: 500, damping: 40 }} />}
                   <span className="nav__label">{item.label}</span>
-                </>
-              )}
-            </NavLink>
-          ))}
-        </nav>
+                </a>
+              )
+            })}
+          </nav>
 
-        <button className="nav__toggle" onClick={() => setOpen((o) => !o)} aria-expanded={open} aria-controls="mobile-menu" aria-label={open ? 'Close menu' : 'Open menu'}>
-          {open ? <FaXmark /> : <FaBars />}
-        </button>
-      </div>
-    </header>
+          <button className="nav__toggle" onClick={() => setOpen((o) => !o)} aria-expanded={open} aria-controls="mobile-menu" aria-label={open ? 'Close menu' : 'Open menu'}>
+            {open ? <FaXmark /> : <FaBars />}
+          </button>
+        </div>
+        <motion.span className="nav__progress" style={{ scaleX: progress }} aria-hidden="true" />
+      </header>
 
       <AnimatePresence>
         {open && (
@@ -55,10 +66,11 @@ export default function Nav() {
             transition={{ duration: 0.35, ease: [0.7, 0, 0.3, 1] }}
           >
             {nav.map((item, i) => (
-              <motion.div key={item.to} initial={{ x: -24, opacity: 0 }} animate={{ x: 0, opacity: 1 }} transition={{ delay: 0.12 + i * 0.04 }}>
-                <NavLink to={item.to} end={item.end} onClick={close} className="nav__sheet-link">
+              <motion.div key={item.id} initial={{ x: -24, opacity: 0 }} animate={{ x: 0, opacity: 1 }} transition={{ delay: 0.12 + i * 0.04 }}>
+                <a href={`#${item.id}`} onClick={go(item.id)} className={`nav__sheet-link ${active === item.id ? 'active' : ''}`}>
+                  <span className="nav__sheet-num">{String(i + 1).padStart(2, '0')}</span>
                   {item.label}
-                </NavLink>
+                </a>
               </motion.div>
             ))}
           </motion.nav>

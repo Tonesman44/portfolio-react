@@ -1,10 +1,10 @@
 {
   "name": "antonio-fabrizio-portfolio",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "build:single": "VITE_ROUTER=hash vite build --mode single",
+    "build:single": "vite build --mode single",
     "lint": "eslint .",
     "preview": "vite preview"
   },
@@ -15,8 +15,7 @@
     "motion": "^13.4.3",
     "react": "^19.3.0",
     "react-dom": "^19.3.0",
-    "react-icons": "^5.7.0",
-    "react-router-dom": "^7.18.4"
+    "react-icons": "^5.7.0"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",

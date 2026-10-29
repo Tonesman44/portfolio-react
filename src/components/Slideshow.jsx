@@ -2,9 +2,24 @@ import { useCallback, useEffect, useState } from 'react'
 import useEmblaCarousel from 'embla-carousel-react'
 import { AnimatePresence, motion } from 'motion/react'
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa6'
-import ScreenMock from './ScreenMock.jsx'
+import AppMock from './AppMock.jsx'
 
-export default function Slideshow({ slides, host }) {
+// A screenshot (or rendered mock) inside a browser frame.
+export function Shot({ host, path, image, mock, alt }) {
+  return (
+    <div className="screen">
+      <div className="screen__bar">
+        <span className="screen__dots"><i /><i /><i /></span>
+        <span className="screen__url">{host}{path}</span>
+      </div>
+      <div className="screen__body">
+        {image ? <img src={image} alt={alt} loading="lazy" className="screen__img" /> : <AppMock screen={mock} />}
+      </div>
+    </div>
+  )
+}
+
+export default function Slideshow({ slides, host, note }) {
   const [mainRef, main] = useEmblaCarousel({ loop: true })
   const [thumbRef, thumbs] = useEmblaCarousel({ containScroll: 'keepSnaps', dragFree: true })
   const [index, setIndex] = useState(0)
@@ -36,7 +51,7 @@ export default function Slideshow({ slides, host }) {
           <div className="show__track">
             {slides.map((s, i) => (
               <div className="show__slide" key={i} aria-roledescription="slide" aria-label={`${i + 1} of ${slides.length}: ${s.title}`}>
-                {s.image ? <img src={s.image} alt={s.title} className="show__img" /> : <ScreenMock layout={s.layout} path={s.path} host={host} />}
+                <Shot host={host} path={s.path} image={s.image} mock={s.mock} alt={s.title} />
               </div>
             ))}
           </div>
@@ -52,7 +67,7 @@ export default function Slideshow({ slides, host }) {
         </span>
         <AnimatePresence mode="wait">
           <motion.div key={index} className="show__text" initial={{ opacity: 0, x: 12 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -12 }} transition={{ duration: 0.2 }}>
-            <h3>{slide.title}</h3>
+            <h4>{slide.title}</h4>
             <p>{slide.caption}</p>
           </motion.div>
         </AnimatePresence>
@@ -68,6 +83,7 @@ export default function Slideshow({ slides, host }) {
           ))}
         </div>
       </div>
+      {note && <p className="show__note">{note}</p>}
     </section>
   )
 }

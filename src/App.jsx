@@ -1,59 +1,60 @@
-import { useEffect } from 'react'
-import { Routes, Route, useLocation } from 'react-router-dom'
-import { MotionConfig } from 'motion/react'
+import { useEffect, useState } from 'react'
+import { MotionConfig, useReducedMotion } from 'motion/react'
+import CutProvider from './components/Cut.jsx'
 import Nav from './components/Nav.jsx'
 import Footer from './components/Footer.jsx'
+import Spotlight from './components/Spotlight.jsx'
 import Stinger from './components/Stinger.jsx'
-import Page from './components/Page.jsx'
-import Home from './pages/Home.jsx'
-import About from './pages/About.jsx'
-import Projects from './pages/Projects.jsx'
-import ProjectDetail from './pages/ProjectDetail.jsx'
-import Experience from './pages/Experience.jsx'
-import Skills from './pages/Skills.jsx'
-import Resume from './pages/Resume.jsx'
-import Contact from './pages/Contact.jsx'
-import NotFound from './pages/NotFound.jsx'
+import Ticker from './components/Ticker.jsx'
+import Hero from './sections/Hero.jsx'
+import About from './sections/About.jsx'
+import Projects from './sections/Projects.jsx'
+import Experience from './sections/Experience.jsx'
+import Skills from './sections/Skills.jsx'
+import Resume from './sections/Resume.jsx'
+import Contact from './sections/Contact.jsx'
+import { scrollToId } from './lib/scroll.js'
 
-const titles = {
-  '/': 'Antonio Fabrizio | Full Stack Engineer',
-  '/about': 'About | Antonio Fabrizio',
-  '/projects': 'Projects | Antonio Fabrizio',
-  '/experience': 'Experience | Antonio Fabrizio',
-  '/skills': 'Skills | Antonio Fabrizio',
-  '/resume': 'Resume | Antonio Fabrizio',
-  '/contact': 'Contact | Antonio Fabrizio',
+function Intro() {
+  const reduce = useReducedMotion()
+  const [show, setShow] = useState(!reduce)
+  useEffect(() => {
+    const t = setTimeout(() => setShow(false), 1100)
+    return () => clearTimeout(t)
+  }, [])
+  return show ? <Stinger intro /> : null
 }
 
 export default function App() {
-  const location = useLocation()
-
+  // Deep links like /#projects still land on the right section.
   useEffect(() => {
-    window.scrollTo(0, 0)
-    document.title = titles[location.pathname] ?? 'Antonio Fabrizio'
-  }, [location.pathname])
+    const id = window.location.hash.replace('#', '')
+    if (id && id !== 'top') {
+      const t = setTimeout(() => scrollToId(id, { instant: true }), 80)
+      return () => clearTimeout(t)
+    }
+  }, [])
 
   return (
     <MotionConfig reducedMotion="user">
-      <a className="skip" href="#main">Skip to content</a>
-      <Nav />
-      <Stinger key={location.key} locationKey={location.key} />
-      <main id="main">
-        <Page key={location.pathname}>
-          <Routes location={location}>
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/projects" element={<Projects />} />
-            <Route path="/projects/:slug" element={<ProjectDetail />} />
-            <Route path="/experience" element={<Experience />} />
-            <Route path="/skills" element={<Skills />} />
-            <Route path="/resume" element={<Resume />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </Page>
-      </main>
-      <Footer />
+      <CutProvider>
+        <a className="skip" href="#main">Skip to content</a>
+        <Spotlight />
+        <Nav />
+        <main id="main">
+          <Hero />
+          <Ticker />
+          <About />
+          <Projects />
+          <Ticker tone="bone" reverse />
+          <Experience />
+          <Skills />
+          <Resume />
+          <Contact />
+        </main>
+        <Footer />
+        <Intro />
+      </CutProvider>
     </MotionConfig>
   )
 }
