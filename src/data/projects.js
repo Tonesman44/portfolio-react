@@ -28,9 +28,70 @@ import aspCars from '../assets/projects/activestays/cars.jpg'
 import aspAnalytics from '../assets/projects/activestays/analytics.jpg'
 import aspLogin from '../assets/projects/activestays/login.jpg'
 
+import mcStorefront from '../assets/projects/movieclub/storefront.jpg'
+import mcShelves from '../assets/projects/movieclub/shelves.jpg'
+import mcWheel from '../assets/projects/movieclub/wheel.jpg'
+import mcRankings from '../assets/projects/movieclub/rankings.jpg'
+import mcDetail from '../assets/projects/movieclub/detail.jpg'
+import mcTrailerTape from '../assets/projects/movieclub/trailer-tape.jpg'
+import mcTrailerPlaying from '../assets/projects/movieclub/trailer-playing.jpg'
+import mcReviews from '../assets/projects/movieclub/reviews.jpg'
+import mcProfileRoom from '../assets/projects/movieclub/profile-room.jpg'
+import mcProfileCardBack from '../assets/projects/movieclub/profile-card-back.jpg'
+import mcProfileStickers from '../assets/projects/movieclub/profile-stickers.jpg'
+
 const video = (n) => `${import.meta.env.BASE_URL}video/brainrot-${n}.mp4`
 
 export const projects = [
+  {
+    slug: 'movie-club-video',
+    title: 'Movie Club Video',
+    caseStudy: true,
+    kicker: 'Full stack web app, live now',
+    context: 'Built for my friends’ movie club. Real members, real ratings',
+    tagline: 'A neighborhood video store for our movie club: yearly shelves of VHS tapes, club rankings, a spin-the-reel picker, member cards, and reviews.',
+    stack: ['Angular 22', 'TypeScript', 'ASP.NET Core 10', 'EF Core', 'PostgreSQL (Neon)', 'ASP.NET Identity', 'TMDB API', 'Netlify + Render + Docker'],
+    summary:
+      'Our club picks films every year and argues about them. Movie Club Video keeps all of it in one place: every pick from MC 22 to MC 26 on lit wooden shelves of 3D VHS cases, club-wide rankings, a wheel that picks your next unwatched film, and a page per movie with live TMDB metadata, the trailer, where to stream it, and member reviews. Members get a membership card that collects stickers, finishes, and seasonal cards as they watch.',
+    framework: [
+      'An Angular 22 front end with standalone components and SCSS talks to an ASP.NET Core 10 minimal API through a generated, type-checked OpenAPI client. EF Core 10 maps the domain to PostgreSQL on Neon, with 17 migrations so far. ASP.NET Core Identity handles cookie sessions, invitations, email confirmation, and a Guest, Member, and Admin permission model that is enforced on the server.',
+      'All TMDB calls go through the backend, so the API key never reaches the browser. Netlify serves the Angular build and proxies /api to a Docker container on Render, which keeps cookies and CSRF first-party. xUnit integration tests run against a throwaway Postgres database in GitHub Actions.',
+    ],
+    highlights: [
+      'Designed and built the full stack: data model, API, auth, the VHS-store UI, deployment, and CI',
+      'Imported 148 real club picks and matched every one to TMDB, then layered on live metadata, trailers, and where-to-watch data',
+      'Club rankings with a podium, Top Shelf rows of five, Most Divisive and Hidden Gems shelves, and personal scores',
+      'Community features: reviews with spoilers and reactions, movie nights with RSVP and calendar files, ballots, daily trivia, an activity feed, and notifications',
+      'Admin panel for collections, posters, comment moderation, invitations, members, and an audit log',
+    ],
+    stats: [
+      { n: 148, label: 'club picks on the shelves' },
+      { n: 5, label: 'club years, MC 22 to MC 26' },
+      { n: 59, suffix: 'K', label: 'lines of C#, TS, HTML, SCSS' },
+      { n: 120, suffix: '+', label: 'API integration tests' },
+    ],
+    links: [
+      { label: 'Visit the live site', href: 'https://movieclubvideo.netlify.app/' },
+    ],
+    media: {
+      type: 'slides',
+      host: 'movieclubvideo.netlify.app',
+      note: 'The API runs on a free tier and sleeps when idle, so the live site can take up to a minute to wake up.',
+      slides: [
+        { title: 'The storefront', caption: 'Movie of the week up front, with the trailer one click away.', image: mcStorefront, path: '/' },
+        { title: 'The club shelves', caption: 'Every pick for the year on lit wooden shelves, in the order the club chose them.', image: mcShelves, path: '/?year=2026' },
+        { title: 'Movie details', caption: 'Each tape gets a page: the club score next to TMDB and IMDb, runtime, genres, and the synopsis.', image: mcDetail, path: '/movies/wild-horse-nine' },
+        { title: 'Trailer: the tape goes in', caption: 'Hit Watch trailer and a labeled VHS tape slides into a wood-grain TV’s VCR.', image: mcTrailerTape, path: '/movies/wild-horse-nine' },
+        { title: 'Trailer: now playing', caption: 'The VCR clicks to PLAY and the YouTube trailer runs on the CRT screen.', image: mcTrailerPlaying, path: '/movies/wild-horse-nine' },
+        { title: 'Reviews and where to watch', caption: 'Live streaming data from JustWatch, then member reviews with spoiler covers and reactions.', image: mcReviews, path: '/movies/wild-horse-nine' },
+        { title: 'My membership room', caption: 'Each member gets a room: a membership card, a top-5 tape stack, and a CRT TV that flips through their Watch Later tapes.', image: mcProfileRoom, path: '/membership' },
+        { title: 'Back of the card', caption: 'Flip the card for a drawn signature, a favorite-genre stamp, and a hole punch for each club year.', image: mcProfileCardBack, path: '/membership' },
+        { title: 'Sticker book', caption: '58 stickers earned by watching and rating films, each marked Rare or Legendary by how few members own it.', image: mcProfileStickers, path: '/membership' },
+        { title: 'The Wheel', caption: 'Spin the reel for your next watch. Signed-in members only spin films they have not seen.', image: mcWheel, path: '/wheel' },
+        { title: 'Rankings', caption: 'The all-time podium and the full ranked table from member ratings.', image: mcRankings, path: '/rankings' },
+      ],
+    },
+  },
   {
     slug: 'brainrot-brawl',
     title: 'Brainrot Brawl',
@@ -95,12 +156,12 @@ export const projects = [
       'Static Vite build deployed on Netlify',
     ],
     links: [
-      { label: 'Visit the live site', href: 'https://lustrous-babka-4390ca.netlify.app/' },
+      { label: 'Visit the live site', href: 'https://jackcherubini.netlify.app/' },
       { label: 'See the code', href: 'https://github.com/Tonesman44/Jack-Website' },
     ],
     media: {
       type: 'slides',
-      host: 'lustrous-babka-4390ca.netlify.app',
+      host: 'jackcherubini.netlify.app',
       slides: [
         { title: 'Hero', caption: 'Dotted trail, a trotting dog, and a live “currently walking” badge.', image: fmHero, path: '/' },
         { title: 'Services and rates', caption: 'Pack walks, solo adventures, puppy check-ins, and drop-in sitting.', image: fmServices, path: '/#services' },
@@ -143,34 +204,6 @@ export const projects = [
         { title: 'Booking confirmed', caption: 'Confirmation with the full itinerary the traveler can come back to. Rendered mock.', mock: 'asp-confirm', path: '/Checkout/Confirmed' },
         { title: 'Analytics dashboard', caption: 'Bookings by city, product mix, and trip durations across all users.', image: aspAnalytics, path: '/Analytics' },
         { title: 'Sign in', caption: 'Local accounts or Google sign-in.', image: aspLogin, path: '/Account/Login' },
-      ],
-    },
-  },
-  {
-    slug: 'pet-adoption',
-    title: 'Pet Adoption App',
-    kicker: 'Database-first C#',
-    context: 'Temple University',
-    tagline: 'A C# application and relational database with separate customer and employee roles.',
-    stack: ['C#', 'SQL', 'Relational design', 'SMTP'],
-    summary:
-      'An adoption platform designed database-first. Customers create accounts, search breeds, view adoption statistics, and submit applications. Employees get their own toolset to manage records and users, approve or deny applications, and trigger automated confirmation emails.',
-    highlights: [
-      'Designed the relational schema around two distinct user roles',
-      'Built employee tools for full record management and application review',
-      'Automated confirmation emails on application decisions',
-    ],
-    links: [{ label: 'Browse my GitHub', href: 'https://github.com/Tonesman44?tab=repositories' }],
-    media: {
-      type: 'slides',
-      host: 'petadoption.app',
-      note: 'Screens are rendered mocks of the app’s flow.',
-      slides: [
-        { title: 'Sign in by role', caption: 'Customers and employees land in different experiences after login.', mock: 'pet-login', path: '/login' },
-        { title: 'Search breeds', caption: 'Browse available pets and filter by species, breed, age, and size.', mock: 'pet-browse', path: '/pets' },
-        { title: 'Apply to adopt', caption: 'Applications are tied to the customer account for tracking.', mock: 'pet-apply', path: '/apply/luna' },
-        { title: 'Employee dashboard', caption: 'Pending applications, adoption stats, and one-click approve or deny.', mock: 'pet-staff', path: '/staff' },
-        { title: 'Manage records', caption: 'Add, modify, and delete pets and users from one table.', mock: 'pet-records', path: '/staff/records' },
       ],
     },
   },

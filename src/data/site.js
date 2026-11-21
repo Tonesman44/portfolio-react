@@ -8,7 +8,7 @@ export const site = {
   github: 'https://github.com/Tonesman44',
   resumePdf: `${import.meta.env.BASE_URL}Antonio_Fabrizio_Resume.pdf`,
   resumeDocx: `${import.meta.env.BASE_URL}Antonio_Fabrizio_Resume.docx`,
-  resumeUpdated: 'September 2026',
+  resumeUpdated: 'November 2026',
   necc: 'https://liquipedia.net/marvelrivals/NECC/2026/Nationals/Division_II',
 }
 
@@ -29,6 +29,7 @@ export const ticker = [
   'Excellis Interactive',
   '.NET + Angular + Ionic',
   'React + Vite',
+  'Movie Club Video',
   'Brainrot Brawl on Roblox',
   'NECC D2 national champion',
   'Temple University 2026',

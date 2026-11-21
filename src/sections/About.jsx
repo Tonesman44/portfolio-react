@@ -1,5 +1,6 @@
+import { useState } from 'react'
 import { motion } from 'motion/react'
-import { FaTrophy, FaArrowUpRightFromSquare } from 'react-icons/fa6'
+import { FaTrophy, FaArrowUpRightFromSquare, FaPlay, FaInstagram } from 'react-icons/fa6'
 import { Section, SectionHead } from '../components/Section.jsx'
 import Reveal, { RevealList } from '../components/Reveal.jsx'
 import Plate from '../components/Plate.jsx'
@@ -9,6 +10,46 @@ import lab from '../assets/photos/esports-lab.jpg'
 import match from '../assets/photos/esports-match.jpg'
 import broadcast from '../assets/photos/esports-broadcast.jpg'
 import desk from '../assets/photos/esports-desk.jpg'
+import gradFriends from '../assets/photos/graduation-friends.jpg'
+import episodeThumb from '../assets/photos/tutv-episode.jpg'
+import igThumb from '../assets/photos/tutv-interview.jpg'
+import Tilt from '../components/Tilt.jsx'
+import { event } from '../lib/analytics.js'
+
+const TUTV_PAGE = 'https://templetv.net/shows/temple-esports-central/marvel-rivals/'
+const IG_POST = 'https://www.instagram.com/p/DIwbhHRtvo1/'
+const VIMEO_ID = '1071771686'
+
+// Click-to-play: nothing loads from Vimeo until the visitor presses play.
+function EpisodePlayer() {
+  const [playing, setPlaying] = useState(false)
+  if (playing) {
+    return (
+      <div className="tv__frame">
+        <iframe
+          src={`https://player.vimeo.com/video/${VIMEO_ID}?autoplay=1&dnt=1&title=0&byline=0`}
+          title="Temple Esports Central: Marvel Rivals episode on TUTV"
+          allow="autoplay; fullscreen; picture-in-picture"
+          allowFullScreen
+        />
+      </div>
+    )
+  }
+  return (
+    <button type="button" className="tv__frame tv__poster" onClick={() => { setPlaying(true); event('Media link', { link: 'TempleTV play' }) }} aria-label="Play the Temple Esports Central episode">
+      <img src={episodeThumb} alt="Antonio in the TUTV studio with the Temple Esports Central hosts" loading="lazy" />
+      <span className="tv__play"><FaPlay aria-hidden="true" /></span>
+      <span className="tv__dur">22 min</span>
+    </button>
+  )
+}
+
+const grad = [
+  ['Degree', 'B.S. Information Science and Technology'],
+  ['GPA', '3.5 / 4.0'],
+  ['Greek life', 'Founding Father, Phi Mu Delta at Temple'],
+  ['Favorite classes', 'Data Structures, Component-Based Software Design, Database Management Systems'],
+]
 
 const duties = [
   'Directed competitive operations across multiple esports teams, overseeing team leads, player development, and program strategy.',
@@ -21,7 +62,7 @@ const facts = [
   ['Now', 'Full stack engineer, Excellis Interactive'],
   ['Before', 'Software engineer intern, Suitable'],
   ['School', 'B.S. Information Science and Technology, Temple, 2026'],
-  ['Side quest', 'Brainrot Brawl, a Roblox arena fighter'],
+  ['Side quests', 'Movie Club Video and Brainrot Brawl'],
 ]
 
 const mosaic = [
@@ -46,6 +87,29 @@ export default function About() {
             <div key={k} className="facts__row"><dt>{k}</dt><dd>{v}</dd></div>
           ))}
         </RevealList>
+
+        <section className="grad" aria-labelledby="grad-title">
+          <Reveal from="left" amount={0.3} className="grad__media">
+            <Tilt max={5} className="grad__tilt">
+              <figure className="grad__photo">
+                <img src={gradFriends} alt="Antonio and his friends in caps and gowns at Temple University commencement, class of 2026" loading="lazy" decoding="async" />
+              </figure>
+              <span className="grad__plate plate plate--red"><span className="plate__text">Class of 2026</span></span>
+            </Tilt>
+          </Reveal>
+          <div className="grad__text">
+            <Reveal from="right">
+              <p className="grad__kicker">Temple University · May 2026</p>
+              <h3 id="grad-title" className="h2">Walked with the whole crew</h3>
+              <p className="grad__lede">Four years of group projects, esports nights, and good friends, and we all crossed the stage together. I wrapped up my degree while already working full time at Excellis.</p>
+            </Reveal>
+            <RevealList className="grad__facts" from="right" stagger={0.07}>
+              {grad.map(([k, val]) => (
+                <div key={k} className="grad__row"><dt>{k}</dt><dd>{val}</dd></div>
+              ))}
+            </RevealList>
+          </div>
+        </section>
 
         <section className="esports" aria-labelledby="esports-title">
           <Reveal className="esports__head" from="up">
@@ -99,6 +163,25 @@ export default function About() {
             <RevealList className="ticks" from="right" stagger={0.08}>
               {duties.map((d) => <li key={d}>{d}</li>)}
             </RevealList>
+          </div>
+
+          <div className="tv">
+            <Reveal from="left" className="tv__player">
+              <EpisodePlayer />
+            </Reveal>
+            <Reveal from="right" className="tv__text">
+              <p className="tv__kicker"><span className="tv__live"><i />On air</span> TUTV · Temple Esports Central</p>
+              <h3 id="tv-title" className="h2">Interviewed on Temple TV</h3>
+              <p>Temple University Television invited me into the studio as the Marvel Rivals game lead. The hosts and I talked about starting a brand-new team for the club and what it takes to lead one. Recorded March 2025.</p>
+              <div className="tv__links">
+                <a className="btn btn--red" href={TUTV_PAGE} target="_blank" rel="noreferrer" onClick={() => event('Media link', { link: 'TempleTV episode' })}>Full episode on TempleTV <FaArrowUpRightFromSquare aria-hidden="true" /></a>
+                <a className="tv__clip" href={IG_POST} target="_blank" rel="noreferrer" onClick={() => event('Media link', { link: 'Instagram clip' })}>
+                  <img src={igThumb} alt="" loading="lazy" />
+                  <span><b>Interview clip</b>TUTV on Instagram</span>
+                  <FaInstagram aria-hidden="true" />
+                </a>
+              </div>
+            </Reveal>
           </div>
         </section>
       </div>

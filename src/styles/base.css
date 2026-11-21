@@ -54,9 +54,11 @@ h1, h2, h3, h4, p, figure, dl, dd { margin: 0; }
 .skip:focus { top: calc(1rem + env(safe-area-inset-top, 0px)); }
 
 /* ── Pointer spotlight on the black ─────────────────────── */
-.spot {
-  position: fixed; inset: 0; z-index: 0; pointer-events: none;
-  background: radial-gradient(640px circle at var(--mx, 50%) var(--my, 30%), rgba(164, 30, 53, .17), transparent 62%);
+.spot { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+.spot__glow {
+  position: absolute; left: -640px; top: -640px; width: 1280px; height: 1280px; border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(164, 30, 53, .17), transparent 62%);
+  transform: translate3d(50vw, 30vh, 0); will-change: transform;
 }
 @media (hover: none) { .spot { display: none; } }
 main, .footer { position: relative; z-index: 1; }

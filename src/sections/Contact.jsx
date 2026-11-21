@@ -4,6 +4,7 @@ import { FaEnvelope, FaLinkedinIn, FaGithub, FaCopy, FaCheck, FaArrowUpRightFrom
 import { Section, SectionHead } from '../components/Section.jsx'
 import Reveal, { RevealList } from '../components/Reveal.jsx'
 import { site } from '../data/site.js'
+import { event } from '../lib/analytics.js'
 
 const reasons = ['A role or opportunity', 'A freelance project', 'Esports', 'Just saying hi']
 
@@ -17,6 +18,7 @@ export default function Contact() {
   // To receive messages without a mail client, swap this for Formspree or EmailJS (see README).
   const submit = (e) => {
     e.preventDefault()
+    event('Contact form sent', { reason: form.reason })
     const subject = `${form.reason} from ${form.name}`
     const body = `${form.message}\n\n${form.name}\n${form.email}`
     window.location.href = `mailto:${site.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`

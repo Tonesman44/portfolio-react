@@ -1,4 +1,4 @@
-// Rendered mock screens for projects without a public build. Styled to look like the real apps,
+// Rendered mock screens for flows the public build hides behind a login. Styled to look like the real apps,
 // scaled with container-query units so they read the same at any card size.
 
 const AspShell = ({ children, active }) => (
@@ -12,31 +12,6 @@ const AspShell = ({ children, active }) => (
     <footer className="mk-asp__foot">© 2026 Antonio Fabrizio &amp; Charles Toothaker | ActiveStays<i>Planned</i>MVC</footer>
   </div>
 )
-
-const PetShell = ({ children, role = 'customer', active }) => (
-  <div className="mk mk--pet">
-    <aside className="mk-pet__side">
-      <span className="mk-pet__brand"><i>🐾</i> Pet Adoption Center</span>
-      <nav>
-        {(role === 'staff'
-          ? ['Dashboard', 'Applications', 'Pets', 'Users', 'Emails', 'Reports']
-          : ['Find a pet', 'My applications', 'Adoption stats', 'Account']
-        ).map((n) => <b key={n} className={n === active ? 'on' : ''}>{n}</b>)}
-      </nav>
-      <span className="mk-pet__who">{role === 'staff' ? 'Employee · Dana K.' : 'Customer · Antonio F.'}</span>
-    </aside>
-    <div className="mk-pet__main">{children}</div>
-  </div>
-)
-
-const PETS = [
-  { emoji: '🐶', name: 'Luna', breed: 'Beagle mix', age: '2 yrs', size: 'Medium', status: 'Available' },
-  { emoji: '🐱', name: 'Pepper', breed: 'Domestic shorthair', age: '4 yrs', size: 'Small', status: 'Available' },
-  { emoji: '🐕', name: 'Max', breed: 'Lab retriever', age: '5 yrs', size: 'Large', status: 'Pending' },
-  { emoji: '🐈', name: 'Olive', breed: 'Tabby', age: '1 yr', size: 'Small', status: 'Available' },
-  { emoji: '🐩', name: 'Mochi', breed: 'Mini poodle', age: '3 yrs', size: 'Small', status: 'Available' },
-  { emoji: '🐰', name: 'Clover', breed: 'Holland lop', age: '2 yrs', size: 'Small', status: 'Adopted' },
-]
 
 const screens = {
   'asp-checkout': () => (
@@ -100,123 +75,6 @@ const screens = {
     </AspShell>
   ),
 
-  'pet-login': () => (
-    <div className="mk mk--pet mk--pet-login">
-      <div className="mk-pet__hero">
-        <span className="mk-pet__brand mk-pet__brand--big"><i>🐾</i> Pet Adoption Center</span>
-        <p>Every pet deserves a second chance. Sign in to find yours.</p>
-        <div className="mk-pet__stats"><b>24</b><span>pets available</span><b>311</b><span>adoptions to date</span><b>9</b><span>days to adopt, on average</span></div>
-      </div>
-      <div className="mk-card mk-card--login">
-        <h3>Sign in</h3>
-        <div className="mk-seg"><b className="on">Customer</b><b>Employee</b></div>
-        <label>Username<span className="mk-input">antonio.f</span></label>
-        <label>Password<span className="mk-input">••••••••••</span></label>
-        <span className="mk-btn mk-btn--pet mk-btn--wide">Sign in</span>
-        <p className="mk-muted">New here? <b>Create an account</b></p>
-      </div>
-    </div>
-  ),
-
-  'pet-browse': () => (
-    <PetShell active="Find a pet">
-      <div className="mk-toolbar">
-        <h3>Find a pet</h3>
-        <div className="mk-filters">
-          <span className="mk-select">Species: Any ▾</span>
-          <span className="mk-select">Breed: Any ▾</span>
-          <span className="mk-select">Age: Any ▾</span>
-          <span className="mk-select on">Status: Available ▾</span>
-        </div>
-      </div>
-      <div className="mk-pets">
-        {PETS.map((p) => (
-          <article key={p.name} className={`mk-pet ${p.status !== 'Available' ? 'is-off' : ''}`}>
-            <span className="mk-pet__pic">{p.emoji}</span>
-            <b>{p.name}</b>
-            <span className="mk-muted">{p.breed} · {p.age} · {p.size}</span>
-            <em className={`mk-badge mk-badge--${p.status.toLowerCase()}`}>{p.status}</em>
-            <span className={`mk-btn mk-btn--pet mk-btn--sm ${p.status !== 'Available' ? 'is-dim' : ''}`}>Apply to adopt</span>
-          </article>
-        ))}
-      </div>
-    </PetShell>
-  ),
-
-  'pet-apply': () => (
-    <PetShell active="Find a pet">
-      <div className="mk-asp__cols mk-asp__cols--pet">
-        <section className="mk-card">
-          <h3>Adoption application</h3>
-          <div className="mk-grid2">
-            <label>Full name<span className="mk-input">Antonio Fabrizio</span></label>
-            <label>Phone<span className="mk-input">(215) 555-0144</span></label>
-            <label className="mk-span2">Address<span className="mk-input">412 Fairmount Ave, Philadelphia, PA 19123</span></label>
-            <label>Housing<span className="mk-input">Apartment, with yard access ▾</span></label>
-            <label>Other pets<span className="mk-input">None ▾</span></label>
-            <label className="mk-span2">Why Luna?<span className="mk-input mk-input--tall">We work from home most days and walk the river trail every morning. Looking for a medium dog who can keep up.</span></label>
-          </div>
-          <span className="mk-btn mk-btn--pet">Submit application</span>
-        </section>
-        <aside className="mk-card mk-card--tint">
-          <span className="mk-pet__pic mk-pet__pic--big">🐶</span>
-          <h4>Luna</h4>
-          <p className="mk-muted">Beagle mix · 2 years · Medium · Female</p>
-          <ul className="mk-lines"><li><span>Spayed</span><b>Yes</b></li><li><span>Vaccinated</span><b>Up to date</b></li><li><span>Good with kids</span><b>Yes</b></li><li><span>Adoption fee</span><b>$150</b></li></ul>
-          <p className="mk-muted mk-small">Applications are reviewed by staff within 2 business days. You will get an email either way.</p>
-        </aside>
-      </div>
-    </PetShell>
-  ),
-
-  'pet-staff': () => (
-    <PetShell role="staff" active="Dashboard">
-      <h3>Dashboard</h3>
-      <div className="mk-stats">
-        <div><span>Available pets</span><b>24</b></div>
-        <div className="hot"><span>Pending applications</span><b>7</b></div>
-        <div><span>Adoptions this month</span><b>11</b></div>
-        <div><span>Avg. days to adopt</span><b>9</b></div>
-      </div>
-      <div className="mk-asp__cols mk-asp__cols--dash">
-        <section className="mk-card">
-          <h4>Pending applications</h4>
-          <ul className="mk-apps">
-            <li><span><b>Luna</b> · Antonio Fabrizio</span><em>Today</em><i className="ok">Approve</i><i className="no">Deny</i></li>
-            <li><span><b>Max</b> · Priya Raman</span><em>Yesterday</em><i className="ok">Approve</i><i className="no">Deny</i></li>
-            <li><span><b>Mochi</b> · Chris Dole</span><em>2 days ago</em><i className="ok">Approve</i><i className="no">Deny</i></li>
-            <li className="done"><span><b>Pepper</b> · Elena Torres</span><em>Approved · confirmation email sent ✓</em></li>
-          </ul>
-        </section>
-        <aside className="mk-card">
-          <h4>Adoptions by month</h4>
-          <div className="mk-chart">{[6, 9, 7, 12, 10, 14, 11].map((h, i) => <span key={i} style={{ height: `${h * 6}%` }} className={i === 5 ? 'hot' : ''} />)}</div>
-          <p className="mk-muted mk-small">Apr to Oct 2026</p>
-        </aside>
-      </div>
-    </PetShell>
-  ),
-
-  'pet-records': () => (
-    <PetShell role="staff" active="Pets">
-      <div className="mk-toolbar">
-        <h3>Records <span className="mk-seg mk-seg--inline"><b className="on">Pets</b><b>Users</b></span></h3>
-        <div className="mk-row"><span className="mk-btn mk-btn--pet mk-btn--sm">+ Add</span><span className="mk-btn mk-btn--ghost mk-btn--sm">Modify</span><span className="mk-btn mk-btn--ghost mk-btn--sm">Delete</span></div>
-      </div>
-      <table className="mk-table">
-        <thead><tr><th>ID</th><th>Name</th><th>Species</th><th>Breed</th><th>Age</th><th>Status</th></tr></thead>
-        <tbody>
-          {PETS.map((p, i) => (
-            <tr key={p.name} className={i === 0 ? 'is-sel' : ''}>
-              <td>{1041 + i}</td><td>{p.name}</td><td>{['Dog', 'Cat', 'Dog', 'Cat', 'Dog', 'Rabbit'][i]}</td><td>{p.breed}</td><td>{p.age}</td>
-              <td><em className={`mk-badge mk-badge--${p.status.toLowerCase()}`}>{p.status}</em></td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-      <p className="mk-muted mk-small">Showing 6 of 31 pets · Row 1041 selected</p>
-    </PetShell>
-  ),
 }
 
 export default function AppMock({ screen }) {

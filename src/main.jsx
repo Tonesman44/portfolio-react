@@ -11,8 +11,12 @@ import './styles/components.css'
 import './styles/mocks.css'
 import './styles/pages.css'
 
+import { startAnalytics } from './lib/analytics.js'
+
 // Browsers restore the old scroll position on reload; the intro wipe expects to start at the top.
 if ('scrollRestoration' in history) history.scrollRestoration = 'manual'
+
+startAnalytics()
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>

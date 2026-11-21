@@ -49,16 +49,11 @@
 
 /* ── Stinger (cut wipe) ─────────────────────────────────── */
 .stinger { position: fixed; inset: 0; z-index: 70; pointer-events: none; overflow: hidden; }
-.stinger__bar { position: absolute; top: -10%; left: -10%; width: 120%; height: 120%; transform-origin: center; }
+.stinger__bar { position: absolute; top: -10%; left: -10%; width: 120%; height: 120%; transform-origin: center; will-change: transform; }
 .stinger__bar--red { background: var(--cherry); clip-path: polygon(12% 0, 100% 0, 88% 100%, 0 100%); }
 .stinger__bar--dark {
   background: var(--black); clip-path: polygon(12% 0, 100% 0, 88% 100%, 0 100%);
   box-shadow: inset 14px 0 0 var(--signal);
-}
-.stinger__mark {
-  position: absolute; left: 50%; top: 50%; translate: -50% -50%;
-  padding: .1em .45em; font-family: var(--display); font-weight: 900; font-size: clamp(4rem, 12vw, 9rem); line-height: 1;
-  color: var(--bone); background: var(--cherry); transform: skewX(var(--slant));
 }
 
 /* ── Ticker ─────────────────────────────────────────────── */
@@ -69,7 +64,7 @@
   box-shadow: 0 10px 40px rgba(0, 0, 0, .5);
 }
 .ticker--bone { background: var(--bone); color: var(--black); transform: rotate(1.2deg) scale(1.03); }
-.ticker__track { display: flex; width: max-content; animation: ticker 42s linear infinite; }
+.ticker__track { display: flex; width: max-content; animation: ticker 42s linear infinite; will-change: transform; }
 .ticker--reverse .ticker__track { animation-direction: reverse; }
 .ticker:hover .ticker__track { animation-play-state: paused; }
 .ticker__item {

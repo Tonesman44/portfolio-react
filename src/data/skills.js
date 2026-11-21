@@ -17,19 +17,19 @@ export const skillGroups = [
 // level: 1 to 5. since: the year I started using it. where: the places it shows up on this page.
 export const skills = [
   { name: 'JavaScript', icon: SiJavascript, group: 'lang', level: 5, since: 2021, used: 'Suitable, Excellis, the Fairmount Dog Co. site, and this portfolio.', where: ['Suitable', 'Excellis', 'Fairmount Dog Co.'] },
-  { name: 'TypeScript', icon: SiTypescript, group: 'lang', level: 4, since: 2023, used: 'Angular and Ionic apps at Excellis.', where: ['Excellis'] },
-  { name: 'C#', icon: TbBrandCSharp, group: 'lang', level: 4, since: 2022, used: '.NET APIs at Excellis, ActiveStaysPlanned, and the Pet Adoption App.', where: ['Excellis', 'ActiveStaysPlanned', 'Pet Adoption App'] },
+  { name: 'TypeScript', icon: SiTypescript, group: 'lang', level: 4, since: 2023, used: 'Angular and Ionic apps at Excellis, and the Movie Club Video front end.', where: ['Excellis', 'Movie Club Video'] },
+  { name: 'C#', icon: TbBrandCSharp, group: 'lang', level: 4, since: 2022, used: '.NET APIs at Excellis, the Movie Club Video API, and ActiveStaysPlanned.', where: ['Excellis', 'Movie Club Video', 'ActiveStaysPlanned'] },
   { name: 'Luau', icon: SiLua, group: 'lang', level: 4, since: 2025, used: '46K+ lines across the client and server of Brainrot Brawl.', where: ['Brainrot Brawl'] },
-  { name: 'SQL', icon: TbSql, group: 'lang', level: 4, since: 2022, used: 'CRM data models at Excellis, the Pet Adoption database, SQL Server for ActiveStaysPlanned.', where: ['Excellis', 'Pet Adoption App', 'ActiveStaysPlanned'] },
+  { name: 'SQL', icon: TbSql, group: 'lang', level: 4, since: 2022, used: 'CRM data models at Excellis, PostgreSQL with EF Core for Movie Club Video, SQL Server for ActiveStaysPlanned.', where: ['Excellis', 'Movie Club Video', 'ActiveStaysPlanned'] },
   { name: 'Java', icon: FaJava, group: 'lang', level: 3, since: 2021, used: 'Temple coursework in data structures and program design.', where: ['Temple University'] },
   { name: 'Python', icon: SiPython, group: 'lang', level: 3, since: 2021, used: 'Scripting, and the rbxmx sync tool that keeps Brainrot Brawl’s Lua in git.', where: ['Brainrot Brawl', 'Temple University'] },
   { name: 'HTML', icon: SiHtml5, group: 'lang', level: 5, since: 2020, used: 'Every front end I have shipped.', where: ['Everywhere'] },
   { name: 'CSS / Sass', icon: SiSass, group: 'lang', level: 5, since: 2020, used: 'Responsive UI at Excellis and Suitable. Design systems for the dog walking site and this one.', where: ['Excellis', 'Suitable', 'Fairmount Dog Co.'] },
 
   { name: 'React', icon: SiReact, group: 'fw', level: 4, since: 2023, used: 'Angular-to-React migration at Suitable, Fairmount Dog Co., and this portfolio.', where: ['Suitable', 'Fairmount Dog Co.'] },
-  { name: 'Angular', icon: SiAngular, group: 'fw', level: 4, since: 2023, used: 'CRM front ends at Excellis, legacy components at Suitable.', where: ['Excellis', 'Suitable'] },
+  { name: 'Angular', icon: SiAngular, group: 'fw', level: 4, since: 2023, used: 'CRM front ends at Excellis, Movie Club Video on Angular 22, legacy components at Suitable.', where: ['Excellis', 'Movie Club Video', 'Suitable'] },
   { name: 'Ionic', icon: SiIonic, group: 'fw', level: 3, since: 2025, used: 'Cross-platform mobile apps at Excellis.', where: ['Excellis'] },
-  { name: '.NET', icon: SiDotnet, group: 'fw', level: 4, since: 2022, used: 'Backend APIs at Excellis.', where: ['Excellis'] },
+  { name: '.NET', icon: SiDotnet, group: 'fw', level: 4, since: 2022, used: 'Backend APIs at Excellis and the ASP.NET Core 10 API behind Movie Club Video.', where: ['Excellis', 'Movie Club Video'] },
   { name: 'ASP.NET Core MVC', icon: SiDotnet, group: 'fw', level: 4, since: 2025, used: 'The ActiveStaysPlanned migration from Web Forms.', where: ['ActiveStaysPlanned'] },
   { name: 'Roblox engine', icon: SiRoblox, group: 'fw', level: 4, since: 2025, used: 'Client-server architecture, DataStores, MarketplaceService, and RemoteEvents for Brainrot Brawl.', where: ['Brainrot Brawl'] },
   { name: 'Motion', icon: SiFramer, group: 'fw', level: 4, since: 2025, used: 'Orchestrated animation on Fairmount Dog Co. and every reveal on this page.', where: ['Fairmount Dog Co.'] },
@@ -43,7 +43,7 @@ export const skills = [
 
   { name: 'AWS', icon: FaAws, group: 'tools', level: 3, since: 2023, used: 'Automated cleanup of unused resources at Suitable.', where: ['Suitable'] },
   { name: 'Git', icon: SiGit, group: 'tools', level: 5, since: 2020, used: 'Daily, everywhere.', where: ['Everywhere'] },
-  { name: 'REST APIs', icon: TbApi, group: 'tools', level: 4, since: 2023, used: 'Designed at Excellis, built at Suitable, consumed (Yelp) in ActiveStaysPlanned.', where: ['Excellis', 'Suitable'] },
+  { name: 'REST APIs', icon: TbApi, group: 'tools', level: 4, since: 2023, used: 'Designed at Excellis, built at Suitable, TMDB behind the Movie Club Video API, Yelp in ActiveStaysPlanned.', where: ['Excellis', 'Suitable', 'Movie Club Video'] },
   { name: 'Figma', icon: SiFigma, group: 'tools', level: 3, since: 2025, used: 'Turning designs into Angular UI at Excellis.', where: ['Excellis'] },
   { name: 'Vercel', icon: SiVercel, group: 'tools', level: 3, since: 2025, used: 'Design handoff and prototypes at Excellis. This site deploys there too.', where: ['Excellis'] },
 

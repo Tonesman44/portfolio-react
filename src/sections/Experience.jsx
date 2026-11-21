@@ -1,11 +1,36 @@
 import { useRef } from 'react'
 import { motion, useScroll, useSpring } from 'motion/react'
-import { FaArrowRight } from 'react-icons/fa6'
+import { FaArrowRight, FaArrowUpRightFromSquare } from 'react-icons/fa6'
 import { Section, SectionHead } from '../components/Section.jsx'
 import Reveal, { RevealList } from '../components/Reveal.jsx'
 import Plate from '../components/Plate.jsx'
 import { useCut } from '../components/Cut.jsx'
+import { event } from '../lib/analytics.js'
 import { experience } from '../data/experience.js'
+
+function Clients({ c }) {
+  const f = c.featured
+  return (
+    <Reveal delay={0.1} className="clients">
+      <p className="clients__title">{c.title}</p>
+      <a className="clients__feature" href={f.href} target="_blank" rel="noreferrer" onClick={() => event('Client link', { client: f.name })}>
+        <span className="clients__badge"><i />{f.badge}</span>
+        <span className="clients__name">{f.name} <em>{f.product}</em></span>
+        <span className="clients__text">{f.text}</span>
+        <FaArrowUpRightFromSquare className="clients__out" aria-hidden="true" />
+      </a>
+      <div className="clients__list">
+        {c.list.map((x) => (
+          <a key={x.name} className="clients__chip" href={x.href} target="_blank" rel="noreferrer" onClick={() => event('Client link', { client: x.name })}>
+            {x.name} <FaArrowUpRightFromSquare aria-hidden="true" />
+          </a>
+        ))}
+        <span className="clients__more">{c.more}</span>
+      </div>
+      <p className="clients__note">{c.note}</p>
+    </Reveal>
+  )
+}
 
 function Photos({ job }) {
   if (!job.photos.length) {
@@ -68,6 +93,7 @@ export default function Experience() {
                 {job.bullets.map((b) => <li key={b}>{b}</li>)}
               </RevealList>
               <Reveal delay={0.1}><ul className="tags">{job.stack.map((s) => <li key={s}>{s}</li>)}</ul></Reveal>
+              {job.clients && <Clients c={job.clients} />}
               {job.more && (
                 <Reveal delay={0.15}>
                   <a href={`#${job.more.to}`} onClick={(e) => { e.preventDefault(); cutTo(job.more.to) }} className="textlink">{job.more.label} <FaArrowRight aria-hidden="true" /></a>

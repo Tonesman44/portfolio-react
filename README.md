@@ -21,6 +21,21 @@ Requires Node 20.19+ (Vite 7).
 
 **GitHub Pages:** add `base: '/<repo-name>/'` in `vite.config.js`, build, and deploy `dist/`.
 
+### Link previews
+
+`index.html` has Open Graph and Twitter tags, and `public/og-image.jpg` (1200x630) is the card LinkedIn, iMessage, Slack and Discord show. Those tags need absolute URLs, so the build fills in `%SITE_URL%`:
+
+- On Vercel it uses the project's production domain automatically.
+- For a custom domain, set the `SITE_URL` environment variable in Vercel (for example `https://antoniofabrizio.com`).
+
+After deploying, paste the URL into LinkedIn's Post Inspector to refresh its cached preview.
+
+### Analytics
+
+The site uses Vercel Web Analytics, which sets no cookies and collects no personal data (`src/lib/analytics.js`). Turn it on in the Vercel dashboard: Project, Analytics, Enable. It does nothing in `npm run dev`.
+
+Because the site is one page, it reports a page view the first time a visitor reaches each section (`/about`, `/projects`, ...) and each project card (`/projects/movie-club-video`, ...), so the Pages list in the dashboard shows which projects people actually look at. Clicks on project links, case study tabs, resume downloads and the contact form are also sent as custom events, which Vercel only shows on the Pro plan.
+
 ## How the page is put together
 
 | Section | File |
@@ -54,11 +69,13 @@ Shared pieces live in `src/components/`: `Cut.jsx` (the stinger cut used by ever
 
 ### Updating the resume
 
-Replace `public/Antonio_Fabrizio_Resume.pdf` and `.docx`, then regenerate the preview image:
+Edit the `.docx` in Word, check it still fits on one page, and save it over `public/Antonio_Fabrizio_Resume.docx`. Export the PDF from Word (File, Save As, PDF) to `public/Antonio_Fabrizio_Resume.pdf`. Then regenerate the preview image `src/assets/photos/resume-preview.jpg` (about 1100 px wide), for example with:
 
 ```bash
-pdftoppm -jpeg -r 110 -singlefile public/Antonio_Fabrizio_Resume.pdf src/assets/photos/resume-preview
+pdftoppm -jpeg -r 130 -singlefile public/Antonio_Fabrizio_Resume.pdf src/assets/photos/resume-preview
 ```
+
+Also bump `resumeUpdated` in `src/data/site.js`.
 
 ### Contact form
 

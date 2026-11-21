@@ -4,6 +4,7 @@ import Reveal, { RevealList } from '../components/Reveal.jsx'
 import Tilt from '../components/Tilt.jsx'
 import preview from '../assets/photos/resume-preview.jpg'
 import { site } from '../data/site.js'
+import { event } from '../lib/analytics.js'
 
 const glance = [
   ['Now', 'Full stack engineer, Excellis Interactive'],
@@ -30,8 +31,8 @@ export default function Resume() {
 
         <aside className="resume__side">
           <RevealList className="resume__actions" from="right">
-            <a className="btn btn--red btn--block" href={site.resumePdf} download><FaDownload aria-hidden="true" /> Download PDF</a>
-            <a className="btn btn--ghost btn--block" href={site.resumeDocx} download><FaFileWord aria-hidden="true" /> Download Word</a>
+            <a className="btn btn--red btn--block" href={site.resumePdf} download onClick={() => event('Resume download', { format: 'pdf' })}><FaDownload aria-hidden="true" /> Download PDF</a>
+            <a className="btn btn--ghost btn--block" href={site.resumeDocx} download onClick={() => event('Resume download', { format: 'docx' })}><FaFileWord aria-hidden="true" /> Download Word</a>
             <a className="textlink" href={site.resumePdf} target="_blank" rel="noreferrer">Open in a new tab <FaArrowUpRightFromSquare aria-hidden="true" /></a>
           </RevealList>
           <RevealList className="glance" from="right" stagger={0.06}>

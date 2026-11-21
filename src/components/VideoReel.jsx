@@ -49,7 +49,7 @@ export default function VideoReel({ clips, stills = [] }) {
                 poster={clip.poster}
                 muted={muted}
                 playsInline
-                preload="metadata"
+                preload="none"
                 onPlay={() => setPlaying(true)}
                 onPause={() => setPlaying(false)}
                 onEnded={next}

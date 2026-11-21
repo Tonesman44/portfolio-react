@@ -3,12 +3,14 @@ import { AnimatePresence, motion, useScroll, useSpring } from 'motion/react'
 import { FaBars, FaXmark } from 'react-icons/fa6'
 import { nav } from '../data/site.js'
 import useActiveSection from '../hooks/useActiveSection.js'
+import { viewOnce } from '../lib/analytics.js'
 import { useCut } from './Cut.jsx'
 
 export default function Nav() {
   const [open, setOpen] = useState(false)
   const ids = useMemo(() => nav.map((n) => n.id), [])
   const active = useActiveSection(ids)
+  useEffect(() => { if (active !== 'top') viewOnce(`/${active}`) }, [active])
   const cutTo = useCut()
   const { scrollYProgress } = useScroll()
   const progress = useSpring(scrollYProgress, { stiffness: 220, damping: 40, mass: 0.4 })

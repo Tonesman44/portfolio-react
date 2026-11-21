@@ -31,6 +31,23 @@ export const experience = [
       { src: crmPipeline, alt: 'Illustrative CRM sales pipeline board mockup', span: 'wide' },
     ],
     photoNote: 'Mockups for illustration, not an actual client build',
+    // Companies whose business apps I build and support. I did not build their public websites.
+    clients: {
+      title: 'Who I build for',
+      note: 'I don’t make these companies’ public websites. I build and support the business apps behind them.',
+      featured: {
+        name: 'Nightlock',
+        product: 'Safety & Communications App',
+        href: 'https://nightlock.com/safety-app/',
+        badge: 'Building now',
+        text: 'The app I’m building now. It sends emergency alerts to 911, staff, and designated responders, keeps everyone talking in real time during an incident, and shares GPS location with building maps and floor plans. It also has smart forms for reporting and supports Alyssa’s Law compliance.',
+      },
+      list: [
+        { name: 'AiO', href: 'https://aio.build/' },
+        { name: 'MISTRAS Group', href: 'https://www.mistrasgroup.com/' },
+      ],
+      more: 'and a handful of other companies',
+    },
     // Shown only if photos is empty
     panel: { big: '6', small: 'legacy codebases supported alongside new CRM builds' },
   },
@@ -72,6 +89,6 @@ export const experience = [
       { src: esportsDesk, alt: 'Two casters at the broadcast desk during a Temple match' },
       { src: esportsBroadcast, alt: 'Stream overlay for Temple Cherry versus Drexel Gold' },
     ],
-    more: { to: '/about', label: 'Read the full esports story' },
+    more: { to: 'about', label: 'Read the full esports story' },
   },
 ]
